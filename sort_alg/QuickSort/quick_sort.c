@@ -39,7 +39,10 @@ static int SearchPivot(int *input_array, int left, int right, int ascend_flag)
 
 void QuickSort(int *sort_data, int start, int end, int ascend_flag)
 {
-    int pivot = SearchPivot(sort_data, start, end, ascend_flag);
-    QuickSort(sort_data, 0, pivot -1 , ascend_flag);
-    QuickSort(sort_data, pivot + 1, end, ascend_flag);
+    if (start < end)
+    {
+        int pivot = SearchPivot(sort_data, start, end, ascend_flag);
+        QuickSort(sort_data, 0, pivot -1 , ascend_flag);
+        QuickSort(sort_data, pivot + 1, end, ascend_flag);
+    }
 }
