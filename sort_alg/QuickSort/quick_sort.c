@@ -18,13 +18,14 @@ static int SearchPivot(int *input_array, int left, int right, int ascend_flag)
     int ascend_param = (1 == ascend_flag) ? 1 : -1;
 
     pivot = left;
+    left += 1;
     while (left < right)
     {
         while ((left < right) && (ascend_param * input_array[right] > ascend_param * input_array[pivot]))
         {
             right--;
         }
-        while ((left < right) && (ascend_param * input_array[left] <= ascend_param * input_array[pivot]))
+        while ((left < right) && (ascend_param * input_array[left] < ascend_param * input_array[pivot]))
         {
             left++;
         }
@@ -42,7 +43,7 @@ void QuickSort(int *sort_data, int start, int end, int ascend_flag)
     if (start < end)
     {
         int pivot = SearchPivot(sort_data, start, end, ascend_flag);
-        QuickSort(sort_data, 0, pivot -1 , ascend_flag);
+        QuickSort(sort_data, start, pivot -1 , ascend_flag);
         QuickSort(sort_data, pivot + 1, end, ascend_flag);
     }
 }
