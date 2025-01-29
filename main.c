@@ -3,6 +3,7 @@
 #include "quick_sort.h"
 #include "sort_alg/QuickSort/quick_sort.h"
 #include "matrix_lib/matrix.h"
+#include "sword_to_offer/link_list/reverse_linklist.h"
 
 #define ARRAY_MAX_NUM 10
 
@@ -45,6 +46,23 @@ static void TestMatrixTrans()
     MatrixPrint(&mtx_dst);
 }
 
+static void TestReverseList()
+{
+    int arr[6] = {1, 2, 2, 3, 4, 5};
+    int length = 6;
+
+    struct ListNode *p_head = GenerateList(arr, length);
+    printf("before reverse, linklist is: \n");
+    PrintList(p_head);
+
+    printf("start reverse linklist ... \n");
+    struct ListNode *reversed_list = ReverseList(p_head);
+
+    printf("after reverse, linklist is: \n");
+    PrintList(reversed_list);
+}
+
+
 int main(){
 #if 0
     printf("Hello, from code_repo!\n");
@@ -67,7 +85,9 @@ int main(){
     PrintArray(arr, ARRAY_MAX_NUM);
 #endif
 
-    TestMatrixTrans();
+    // TestMatrixTrans();
+
+    TestReverseList();
 
     return 0;
 }
