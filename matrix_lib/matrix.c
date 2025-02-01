@@ -122,6 +122,42 @@ int MatrixScalarMulAt(matrix *mtx_src, matrix *mtx_dst, float *scalar)
     return 0;
 }
 
+int MatrixConcateSigmaPnts(matrix *mtx_x_mean, matrix *mtx_scalar_l, matrix *mtx_sigma_pnts)
+{
+    int x_mean_row = mtx_x_mean->row;
+    int x_mean_col = mtx_x_mean->col;
+    int scalar_l_row = mtx_scalar_l->row;
+    int scalar_l_col = mtx_scalar_l->col;
+    int sigma_pnts_row = mtx_sigma_pnts->row;
+    int sigma_pnts_col = mtx_sigma_pnts->col;
+    // matrix mtx_mean_cpy;
+    // memcpy(&mtx_mean_cpy, mtx_x_mean, sizeof(matrix));
+
+    int row_idx, col_idx;
+
+    for (row_idx = 0; row_idx <sigma_pnts_row; row_idx++)
+    {
+        for (col_idx = 0; col_idx < x_mean_col; col_idx++)
+        {
+            mtx_sigma_pnts->data[row_idx * sigma_pnts_col + col_idx] = mtx_x_mean->data[row_idx * x_mean_col + col_idx];
+        }
+
+        for (col_idx = 0; col_idx < scalar_l_col; col_idx++)
+        {
+            mtx_sigma_pnts->data[row_idx * sigma_pnts_col + x_mean_col + col_idx] = mtx_x_mean->data[row_idx * x_mean_col + 0] + 
+                mtx_scalar_l->data[row_idx * scalar_l_col + col_idx];
+        }
+
+        for (col_idx = 0; col_idx < scalar_l_col; col_idx++)
+        {
+            mtx_sigma_pnts->data[row_idx * sigma_pnts_col + x_mean_col + scalar_l_col + col_idx] = mtx_x_mean->data[row_idx * x_mean_col + 0] - 
+                mtx_scalar_l->data[row_idx * scalar_l_col + col_idx];
+        }
+    }
+
+    return 0;
+}
+
 void MatrixPrint(matrix *mtx)
 {
     int i, j;

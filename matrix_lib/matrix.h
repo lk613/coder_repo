@@ -2,6 +2,7 @@
 #define MATRIX_H
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 #ifndef MATRIX_DEBUG
 #define MATRIX_DEBUG
@@ -24,6 +25,8 @@ int MatrixInit(matrix *mtx, int *row, int *col, float *data);
 int MatrixCholesky(matrix *mtx_src, matrix *mtx_dst);
 
 int MatrixScalarMulAt(matrix *mtx_src, matrix *mtx_dst, float *scalar);
+
+int MatrixConcateSigmaPnts(matrix *mtx_x_mean, matrix *mtx_scalar_l, matrix *mtx_sigma_pnts);
 
 // void MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
 

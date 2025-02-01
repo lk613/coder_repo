@@ -159,6 +159,58 @@ static void TestMatrixScalarMulAt()
     }
 }
 
+static void TestMatrixConcateSigmaPnts()
+{
+    matrix mtx_x_mean;
+    matrix mtx_scalar_l;
+
+    int row_x_mean = 4;
+    int col_x_mean = 1;
+    float x_mean_data[] = {
+        1.0,
+        2.0,
+        3.0,
+        4.0
+    };
+    mtx_x_mean.row = row_x_mean;
+    mtx_x_mean.col = col_x_mean;
+    mtx_x_mean.data = x_mean_data;
+
+    int row_scalar_l = 4;
+    int col_scalar_l = 1;
+    float scalar_l_data[] = {
+        11.0,
+        12.0,
+        13.0,
+        14.0
+    };
+    // float scalar_l_data[] = {
+    //     1.0, 2.0, 3.0,
+    //     4.0, 5.0, 6.0,
+    //     7.0, 8.0, 9.0,
+    //     10.0, 11.0, 12.0
+    // };
+    mtx_scalar_l.row = row_scalar_l;
+    mtx_scalar_l.col = col_scalar_l;
+    mtx_scalar_l.data = scalar_l_data;
+
+    printf("Matrix_x_mean: \n");
+    MatrixPrint(&mtx_x_mean);
+
+    printf("Matrix_scalar_l: \n");
+    MatrixPrint(&mtx_scalar_l);
+
+    matrix matrix_sigma_pnts;
+    float *mtx_sigma_pnts = (float *)malloc(row_x_mean * (col_x_mean + 2 * col_scalar_l) * sizeof(float));
+    matrix_sigma_pnts.row = row_x_mean;
+    matrix_sigma_pnts.col = col_x_mean + col_scalar_l + col_scalar_l;
+    matrix_sigma_pnts.data = mtx_sigma_pnts;
+
+    MatrixConcateSigmaPnts(&mtx_x_mean, &mtx_scalar_l, &matrix_sigma_pnts);
+    printf("Matrix_sigma_pnts: \n");
+    MatrixPrint(&matrix_sigma_pnts);
+
+}
 
 
 int main(){
@@ -189,7 +241,9 @@ int main(){
 
     // TestCholesky();
 
-    TestMatrixScalarMulAt();
+    // TestMatrixScalarMulAt();
+
+    TestMatrixConcateSigmaPnts();
 
     return 0;
 }
