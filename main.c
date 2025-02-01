@@ -25,7 +25,10 @@ static void TestMatrixTrans()
     matrix mtx_src;
     matrix mtx_dst;
 
-    int size[2] = {3,4};
+    // int size[2] = {3,4};
+    int row = 3;
+    int col = 4;
+
     float data[12] = {
         1.0, 2.0, 3.0, 4.0,
         5.0, 23.7, 7.0, 8.0,
@@ -33,17 +36,19 @@ static void TestMatrixTrans()
     };
 
     int trans_size[2] = {4,3};
+    int row_trans = 4;
+    int col_trans = 3;
     float trans_data[12] = {0 * 12};
 
-    MatrixInit(&mtx_src, size, data);
-    MatrixInit(&mtx_dst, trans_size, trans_data);
+    MatrixInit(&mtx_src, &row, &col, data);
+    MatrixInit(&mtx_dst, &row_trans, &col_trans, trans_data);
 
     printf("before transform, mtx_src is: \n");
     MatrixPrint(&mtx_src);
 
-    MatrixTrans(&mtx_src, &mtx_dst);
-    printf("\nafter transform, mtx_dst is: \n");
-    MatrixPrint(&mtx_dst);
+    // MatrixTrans(&mtx_src, &mtx_dst);
+    // printf("\nafter transform, mtx_dst is: \n");
+    // MatrixPrint(&mtx_dst);
 }
 
 static void TestReverseList()
@@ -62,6 +67,50 @@ static void TestReverseList()
     PrintList(reversed_list);
 }
 
+static void TestCholesky()
+{
+    matrix mtx_src;
+    matrix mtx_dst;
+
+#if 0
+    int row = 2;
+    int col = 2;
+    float A[] = {
+                    4.0,  2.0,
+                    2.0,  5.0
+                };  // 按行存储
+#else
+    int row = 3;
+    int col = 3;
+    float A[] = {
+                    4.0,  12.0, -16.0,
+                    12.0, 37.0, -43.0,
+                    -16.0, -43.0, 98.0
+                };
+#endif
+    mtx_src.row = row;
+    mtx_src.col = col;
+    mtx_src.data = A;
+
+    printf("Cholesky decomposition for matrix A is: \n");
+    MatrixPrint(&mtx_src);
+
+    float *mtx_L = (float *)malloc(row * col * sizeof(float));
+    mtx_dst.row = row;
+    mtx_dst.col = col;
+    mtx_dst.data = mtx_L;
+
+    int ret = MatrixCholesky(&mtx_src, &mtx_dst);
+    if (0 == ret)
+    {
+        printf("Cholesky decomposition result is: \n");
+        MatrixPrint(&mtx_dst);
+    }
+    else
+    {
+        printf("Cholesky decomposition failed\n");
+    }
+}
 
 int main(){
 #if 0
@@ -87,7 +136,9 @@ int main(){
 
     // TestMatrixTrans();
 
-    TestReverseList();
+    // TestReverseList();
+
+    TestCholesky();
 
     return 0;
 }

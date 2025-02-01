@@ -1,38 +1,113 @@
+// #include <math.h>
 #include "matrix.h"
 
-void MatrixInit(matrix *mtx, int *size, float *data)
+int MatrixInit(matrix *mtx, int *row, int *col, float *data)
 {
-    mtx->size[0] = size[0];
-    mtx->size[1] = size[1];
+#ifdef MATRIX_DEBUG
+    if (row == NULL)
+    {
+        printf("Error: row is NULL\n");
+        return ERROR_MATRIX_ROW_NULL;
+    }
+    if (col == NULL)
+    {
+        printf("Error: col is NULL\n");
+        return ERROR_MATRIX_COL_NULL;
+    }
+    if (data == NULL)
+    {
+        printf("Error: data is NULL\n");
+        return ERROR_MATRIX_DATA_NULL;
+    }
+#endif
+
+    mtx->row = *row;
+    mtx->col = *col;
     mtx->data = data;
     
-    return;
+    return 0;
 }
 
-void MatrixTrans(matrix *mtx_src, matrix *mtx_dst)
+
+int MatrixCholesky(matrix *mtx_src, matrix *mtx_dst)
 {
-    int i, j;
-    int row = mtx_src->size[0];
-    int col = mtx_src->size[1];
-    float *src_data = mtx_src->data;
-    float *dst_data = mtx_dst->data;
-    
-    for (i = 0; i < row; i++)
+#ifdef MATRIX_DEBUG
+    if (mtx_src == NULL)
     {
-        for (j = 0; j < col; j++)
-        {
-            dst_data[j * row + i] = src_data[i * col + j];
-        }
+        printf("Error: mtx_src is NULL\n");
+        return ERROR_MATRIX_SIZE_NULL;
+    }
+    if (mtx_dst == NULL)
+    {
+        printf("Error: mtx_dst is NULL\n");
+        return ERROR_MATRIX_SIZE_NULL;
+    }
+
+    if (mtx_src->row != mtx_src->col || mtx_dst->row != mtx_dst->col || mtx_src->row != mtx_dst->row || mtx_src->row != mtx_dst->col)
+    {
+        printf("Error: mtx_src is not a square matrix\n");
+        return ERROR_MATRIX_NOT_SQUARE_MTX;
     }
     
-    return;
+    if (mtx_src->row < 1)
+    {
+        printf("Error: mtx_src is not a valid matrix\n");
+        return ERROR_MATRIX_ROW_NULL;
+    }
+    
+    if (mtx_src->col < 1)
+    {
+        printf("Error: mtx_src is not a valid matrix\n");
+        return ERROR_MATRIX_COL_NULL;
+    }
+#endif
+
+    /* calculate diag elem for L matrix : L[j][j] */
+
+    int n = mtx_src->row;
+    int j;
+    int k;
+    int i;
+    for (j = 0; j < n; j++)    // calculate by column
+    {
+        /* calculate diag elem */
+        int sum_diag = 0.0f;
+        for (k = 0; k < j; k++)
+        {
+            sum_diag = sum_diag + (mtx_dst->data[j * n + k] * mtx_dst->data[j * n + k]);
+        }
+        float a_jj = mtx_src->data[j * n + j];
+        float diag_elem = a_jj - sum_diag;
+
+        if (diag_elem <= 0)
+        {
+            printf("Error: mtx_src is not a positive definite matrix\n");
+            return -1;
+        }
+
+        mtx_dst->data[j * n + j] = sqrt(diag_elem);
+
+        /* calculate undiag elem */
+        for (i = j + 1; i < n; i++)
+        {
+            int sum_undiag = 0.0f;
+            for (k = 0; k < j; k++)
+            {
+                sum_undiag = sum_undiag + (mtx_dst->data[i * n + k] * mtx_dst->data[j * n + k]);
+            }
+            float a_ij = mtx_src->data[i * n + j];
+            mtx_dst->data[i * n + j] = (a_ij - sum_undiag) / mtx_dst->data[j * n + j];
+        }
+    }
+
+    return 0;
 }
 
 void MatrixPrint(matrix *mtx)
 {
     int i, j;
-    int row = mtx->size[0];
-    int col = mtx->size[1];
+    int row = mtx->row;
+    int col = mtx->col;
     float *data = mtx->data;
     
     for (i = 0; i < row; i++)

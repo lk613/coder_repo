@@ -18,6 +18,8 @@ add_executable(code_repo
     sword_to_offer/link_list/reverse_linklist.c
 )
 
+target_link_libraries(code_repo m)
+
 include(CTest)
 enable_testing()
 
