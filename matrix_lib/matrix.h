@@ -23,6 +23,8 @@ int MatrixInit(matrix *mtx, int *row, int *col, float *data);
 
 int MatrixCholesky(matrix *mtx_src, matrix *mtx_dst);
 
+int MatrixScalarMulAt(matrix *mtx_src, matrix *mtx_dst, float *scalar);
+
 // void MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
 
 void MatrixPrint(matrix *mtx);

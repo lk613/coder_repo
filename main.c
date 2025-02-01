@@ -112,6 +112,55 @@ static void TestCholesky()
     }
 }
 
+static void TestMatrixScalarMulAt()
+{
+    matrix mtx_src;
+    matrix mtx_dst;
+
+#if 0
+    int row = 2;
+    int col = 2;
+    float A[] = {
+                    4.0,  2.0,
+                    2.0,  5.0
+                };  // 按行存储
+#else
+    int row = 3;
+    int col = 3;
+    float A[] = {
+                    4.0,  12.0, -16.0,
+                    12.0, 37.0, -43.0,
+                    -16.0, -43.0, 98.0
+                };
+#endif
+    mtx_src.row = row;
+    mtx_src.col = col;
+    mtx_src.data = A;
+
+    printf("Cholesky decomposition for matrix A is: \n");
+    MatrixPrint(&mtx_src);
+
+    float *mtx_L = (float *)malloc(row * col * sizeof(float));
+    mtx_dst.row = row;
+    mtx_dst.col = col;
+    mtx_dst.data = mtx_L;
+
+    // int ret = MatrixCholesky(&mtx_src, &mtx_dst);
+    float scalar = 2.0;
+    int ret = MatrixScalarMulAt(&mtx_src, &mtx_dst, &scalar);
+    if (0 == ret)
+    {
+        printf("Cholesky decomposition result is: \n");
+        MatrixPrint(&mtx_dst);
+    }
+    else
+    {
+        printf("Cholesky decomposition failed\n");
+    }
+}
+
+
+
 int main(){
 #if 0
     printf("Hello, from code_repo!\n");
@@ -138,7 +187,9 @@ int main(){
 
     // TestReverseList();
 
-    TestCholesky();
+    // TestCholesky();
+
+    TestMatrixScalarMulAt();
 
     return 0;
 }

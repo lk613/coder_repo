@@ -103,6 +103,25 @@ int MatrixCholesky(matrix *mtx_src, matrix *mtx_dst)
     return 0;
 }
 
+int MatrixScalarMulAt(matrix *mtx_src, matrix *mtx_dst, float *scalar)
+{
+    int row_idx, col_idx;
+    int row = mtx_src->row;
+    int col = mtx_src->col;
+    float *data_src = mtx_src->data;
+    float *data_dst = mtx_dst->data;
+
+    for (row_idx = 0; row_idx < row; row_idx++)
+    {
+        for (col_idx = 0; col_idx < col; col_idx++)
+        {
+            data_dst[row_idx * row + col_idx] = (*scalar) * data_src[col_idx * col + row_idx];
+        }
+    }
+
+    return 0;
+}
+
 void MatrixPrint(matrix *mtx)
 {
     int i, j;
