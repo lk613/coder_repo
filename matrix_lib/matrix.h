@@ -28,6 +28,8 @@ int MatrixScalarMulAt(matrix *mtx_src, matrix *mtx_dst, float *scalar);
 
 int MatrixConcateSigmaPnts(matrix *mtx_x_mean, matrix *mtx_scalar_l, matrix *mtx_sigma_pnts);
 
+int MatrixRowVectorMulMatrix(matrix *mtx_vec, matrix *mtx_src, matrix *mtx_dst);
+
 // void MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
 
 void MatrixPrint(matrix *mtx);

@@ -158,6 +158,41 @@ int MatrixConcateSigmaPnts(matrix *mtx_x_mean, matrix *mtx_scalar_l, matrix *mtx
     return 0;
 }
 
+/**
+ * @brief row vector (1 x n) multiply matrix (n X m)
+ * 
+ * @param mtx_vec : row vector (1 x n)
+ * @param mtx_src : matrix (n X m)
+ * @param mtx_dst : matrix (1 X m)
+ * @return int 
+ */
+int MatrixRowVectorMulMatrix(matrix *mtx_vec, matrix *mtx_src, matrix *mtx_dst)
+{
+#ifdef MATRIX_DEBUG
+
+#endif
+
+    int i;
+    int j;
+    int mtx_row = mtx_src->row;
+    int ret_col = mtx_src->col; // mtx_vec->col;
+
+    mtx_dst->row = mtx_vec->row;
+    mtx_dst->col = ret_col;
+
+    for (i = 0; i< ret_col; i++)
+    {
+        float dot_product = 0.0f;
+        for (j = 0; j < mtx_row; j++)
+        {
+            dot_product += mtx_vec->data[0 * mtx_vec->row + j] * mtx_src->data[j * mtx_src->col + i]; 
+        }
+        mtx_dst->data[0 * mtx_dst->row + i] = dot_product;
+    }
+
+    return 0;
+}
+
 void MatrixPrint(matrix *mtx)
 {
     int i, j;

@@ -212,6 +212,48 @@ static void TestMatrixConcateSigmaPnts()
 
 }
 
+static void TestMatrixRowVectorMulMatrix()
+{
+    matrix row_vec;
+    matrix mtx_mult_src;
+
+    int row_vec_num = 1;
+    int col_vec_num = 4;
+    float x_mean_data[4] = {1.0, 2.0, 3.0, 4.0};
+    row_vec.row = row_vec_num;
+    row_vec.col = col_vec_num;
+    row_vec.data = x_mean_data;
+
+    int row_mul_num = 4;
+    int col_mul_num = 3;
+    float mtx_mul_data[12] = {
+        11.0, 12.0, 13.0,
+        14.0, 15.0, 16.0,
+        17.0, 18.0, 19.0,
+        20.0, 21.0, 22.0
+    };
+
+    mtx_mult_src.row = row_mul_num;
+    mtx_mult_src.col = col_mul_num;
+    mtx_mult_src.data = mtx_mul_data;
+
+    printf("Row Vector: \n");
+    MatrixPrint(&row_vec);
+
+    printf("Matrix Multi: \n");
+    MatrixPrint(&mtx_mult_src);
+
+    matrix ret_vector_mul_mtx;
+    float *mtx_sigma_pnts = (float *)malloc(row_vec_num * col_mul_num * sizeof(float));
+    ret_vector_mul_mtx.row = row_vec_num;
+    ret_vector_mul_mtx.col = col_mul_num;
+    ret_vector_mul_mtx.data = mtx_sigma_pnts;
+
+    MatrixRowVectorMulMatrix(&row_vec, &mtx_mult_src, &ret_vector_mul_mtx);
+    printf("ret_vector_mul_mtx: \n");
+    MatrixPrint(&ret_vector_mul_mtx);
+
+}
 
 int main(){
 #if 0
@@ -243,7 +285,9 @@ int main(){
 
     // TestMatrixScalarMulAt();
 
-    TestMatrixConcateSigmaPnts();
+    // TestMatrixConcateSigmaPnts();
+
+    TestMatrixRowVectorMulMatrix();
 
     return 0;
 }
