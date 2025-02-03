@@ -255,6 +255,61 @@ static void TestMatrixRowVectorMulMatrix()
 
 }
 
+static void TestMatrixSubVectorMtx()
+{
+    matrix mtx_a;
+    matrix mtx_b;
+
+    int row_num_a = 1;
+    int col_num_a = 3;
+    float mtx_a_data[4] = {11.0, 12.0, 13.0};
+    mtx_a.row = row_num_a;
+    mtx_a.col = col_num_a;
+    mtx_a.data = mtx_a_data;
+
+    int row_num_b = 4;
+    int col_num_b = 3;
+    float mtx_b_data[12] = {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0,
+        10.0, 11.0, 12.0
+    };
+
+    mtx_b.row = row_num_b;
+    mtx_b.col = col_num_b;
+    mtx_b.data = mtx_b_data;
+
+    printf("Matrix a: \n");
+    MatrixPrint(&mtx_a);
+
+    printf("Matrix b: \n");
+    MatrixPrint(&mtx_b);
+
+#if 1
+    matrix ret_b_sub_a;
+    float *add_b_sub_a = (float *)malloc(row_num_b * col_num_b * sizeof(float));
+    ret_b_sub_a.row = row_num_b;
+    ret_b_sub_a.col = col_num_b;
+    ret_b_sub_a.data = add_b_sub_a;
+#else
+    matrix ret_a_sub_b;
+    float *add_a_sub_b = (float *)malloc(row_num_b * col_num_b * sizeof(float));
+    ret_a_sub_b.row = row_num_b;
+    ret_a_sub_b.col = col_num_b;
+    ret_a_sub_b.data = add_a_sub_b;
+#endif
+
+    // MatrixSubVectorMtx(&mtx_a, &mtx_b, &ret_a_sub_b);
+    MatrixSubVectorMtx(&mtx_b, &mtx_a, &ret_b_sub_a);
+    printf("Matrix ret_a_sub_b: \n");
+#if 1
+    MatrixPrint(&ret_b_sub_a);
+#else
+    MatrixPrint(&ret_a_sub_b);
+#endif
+}
+
 int main(){
 #if 0
     printf("Hello, from code_repo!\n");
@@ -288,6 +343,8 @@ int main(){
     // TestMatrixConcateSigmaPnts();
 
     TestMatrixRowVectorMulMatrix();
+
+    // TestMatrixSubVectorMtx();
 
     return 0;
 }

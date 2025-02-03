@@ -13,6 +13,7 @@
 #define ERROR_MATRIX_COL_NULL -3
 #define ERROR_MATRIX_DATA_NULL -4
 #define ERROR_MATRIX_NOT_SQUARE_MTX -5
+#define ERROR_MATRIX_OPPORATION_INVALID -6
 typedef struct matrix
 {
     int row;
@@ -29,6 +30,8 @@ int MatrixScalarMulAt(matrix *mtx_src, matrix *mtx_dst, float *scalar);
 int MatrixConcateSigmaPnts(matrix *mtx_x_mean, matrix *mtx_scalar_l, matrix *mtx_sigma_pnts);
 
 int MatrixRowVectorMulMatrix(matrix *mtx_vec, matrix *mtx_src, matrix *mtx_dst);
+
+int MatrixSubVectorMtx(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst);
 
 // void MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
 

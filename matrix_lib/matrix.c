@@ -193,6 +193,66 @@ int MatrixRowVectorMulMatrix(matrix *mtx_vec, matrix *mtx_src, matrix *mtx_dst)
     return 0;
 }
 
+int MatrixSubVectorMtx(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst)
+{
+    int row_idx;
+    int col_idx;
+    int flag;
+#ifdef MATRIX_DEBUG
+    if ((mtx_a->row != 1) && (mtx_a->col != 1) && (mtx_b->row != 1) && (mtx_b->col != 1))
+    {
+        printf("Error: mtx_a or mtx_b is not a vector\n");
+        return ERROR_MATRIX_OPPORATION_INVALID;
+    }
+#endif
+
+    if ((mtx_a->row == 1) && (mtx_b->row != 1) && (mtx_a->col == mtx_b->col))
+    {
+        flag = 0;
+    }
+    else if ((mtx_a->col == 1) && (mtx_b->col != 1) && (mtx_a->row == mtx_b->row))
+    {
+        flag = 1;
+    }
+    else if ((mtx_b->row == 1) && (mtx_a->row != 1) && (mtx_a->col == mtx_b->col))
+    {
+        flag = 2;
+    }else if ((mtx_b->col == 1) && (mtx_a->col != 1) && (mtx_a->row == mtx_b->row))
+    {
+        flag = 3;
+    }else
+    {
+        printf("Error: mtx_a or mtx_b is not a vector\n");
+        return ERROR_MATRIX_OPPORATION_INVALID;
+    }
+
+    for (row_idx = 0; row_idx < mtx_dst->row; row_idx++)
+    {
+        for (col_idx = 0; col_idx < mtx_dst->col; col_idx++)
+        {
+            switch (flag)
+            {
+                case 0:
+                    mtx_dst->data[row_idx * mtx_dst->col + col_idx] = mtx_a->data[0 * mtx_a->row + col_idx] - mtx_b->data[row_idx * mtx_b->col + col_idx];
+                    break;
+                case 1:
+                    mtx_dst->data[row_idx * mtx_dst->col + col_idx] = mtx_a->data[row_idx * mtx_a->col + 0] - mtx_b->data[row_idx * mtx_b->col + col_idx];
+                    break;
+                case 2:
+                    mtx_dst->data[row_idx * mtx_dst->col + col_idx] = mtx_a->data[row_idx * mtx_a->col + col_idx] - mtx_b->data[0 * mtx_b->row + col_idx];
+                    break;
+                case 3:
+                    mtx_dst->data[row_idx * mtx_dst->col + col_idx] = mtx_a->data[row_idx * mtx_a->col + col_idx] - mtx_b->data[row_idx * mtx_b->col + 0];
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    return 0;
+}
+
 void MatrixPrint(matrix *mtx)
 {
     int i, j;
