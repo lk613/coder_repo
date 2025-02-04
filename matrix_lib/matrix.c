@@ -253,6 +253,36 @@ int MatrixSubVectorMtx(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst)
     return 0;
 }
 
+int MatrixRowScale(matrix *mtx_src, matrix *scale_vector, matrix *mtx_dst)
+{
+#ifdef MATRIX_DEBUG
+    if ((mtx_src->row == 1) || (mtx_src->col == 1))
+    {
+        printf("Error: mtx_src is not a matrix\n");
+        return ERROR_MATRIX_OPPORATION_INVALID;
+    }
+    if ((scale_vector->row != 1)  || (scale_vector->col != mtx_src->row))
+    {
+        printf("Error: scale_vector is not a valid vector\n");
+        return ERROR_MATRIX_OPPORATION_INVALID;
+    }
+#endif
+
+    int row_idx;
+    int col_idx;
+    for (row_idx = 0; row_idx < mtx_dst->row; row_idx++)
+    {
+        for (col_idx = 0; col_idx < mtx_dst->col; col_idx++)
+        {
+            mtx_dst->data[row_idx * mtx_dst->col + col_idx] = mtx_src->data[row_idx * mtx_src->col + col_idx] 
+                    * scale_vector->data[row_idx];
+        }
+    }
+
+    return 0;
+}
+
+
 void MatrixPrint(matrix *mtx)
 {
     int i, j;

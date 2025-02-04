@@ -33,6 +33,8 @@ int MatrixRowVectorMulMatrix(matrix *mtx_vec, matrix *mtx_src, matrix *mtx_dst);
 
 int MatrixSubVectorMtx(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst);
 
+int MatrixRowScale(matrix *mtx_src, matrix *scale_vector, matrix *mtx_dst);
+
 // void MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
 
 void MatrixPrint(matrix *mtx);
