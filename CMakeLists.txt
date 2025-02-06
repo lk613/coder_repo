@@ -8,6 +8,7 @@ include_directories(
     sort_alg/QuickSort
     matrix_lib
     sto/link_list
+    sto/array
 )
 
 add_executable(code_repo 
@@ -16,6 +17,8 @@ add_executable(code_repo
     sort_alg/QuickSort/quick_sort.c
     matrix_lib/matrix.c
     sto/link_list/reverse_linklist.c
+    sto/array/two_sum.c
+    sto/array/hash_table.c
 )
 
 target_link_libraries(code_repo m)

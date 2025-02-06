@@ -4,6 +4,11 @@
 #include "sort_alg/QuickSort/quick_sort.h"
 #include "matrix_lib/matrix.h"
 #include "sto/link_list/reverse_linklist.h"
+#include "sto/array/two_sum.h"
+
+#ifndef TWO_SUM_BY_HASH_TABLE
+#define TWO_SUM_BY_HASH_TABLE
+#endif
 
 #define ARRAY_MAX_NUM 10
 
@@ -353,6 +358,34 @@ static void TestMatrixRowScale()
 
 }
 
+static void TestTwoDataSum()
+{
+    int arr[6] = {1, 2, 2, 3, 4, 5};
+    int length = 6;
+    int target = 8;
+    int ret[2] = {-1, -1};
+    printf("Source array is: \n");
+    PrintArr(arr, length);
+
+    printf("target num is: %d\n", target);
+
+#ifdef TWO_SUM_BY_HASH_TABLE
+    int ret_val = TwoElemSumByHashTable(arr, length, target, ret);
+#else
+    int ret_val = TwoElemSum(arr, length, target, ret);
+#endif
+    if (0 == ret_val)
+    {
+        printf("Has two elements !\n");
+        printf("Two elements index is: %d, %d\n Two elem data is: %d, %d\n", ret[0], ret[1], arr[ret[0]], arr[ret[1]]);
+    }
+    else
+    {
+        printf("Two elements sum is not found\n");
+    }
+}
+
+
 int main(){
 #if 0
     printf("Hello, from code_repo!\n");
@@ -387,9 +420,13 @@ int main(){
 
     // TestMatrixRowVectorMulMatrix();
 
-    TestMatrixRowScale();
+    // TestMatrixRowScale();
 
     // TestMatrixSubVectorMtx();
+
+    /**********************test sto********************** */
+    TestTwoDataSum();
+    /**********************test sto********************** */
 
     return 0;
 }
