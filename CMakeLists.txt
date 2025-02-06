@@ -7,7 +7,7 @@ include_directories(
     sort_alg/BubbleSort
     sort_alg/QuickSort
     matrix_lib
-    sword_to_offer/link_list
+    sto/link_list
 )
 
 add_executable(code_repo 
@@ -15,7 +15,7 @@ add_executable(code_repo
     sort_alg/BubbleSort/bubble_sort.c
     sort_alg/QuickSort/quick_sort.c
     matrix_lib/matrix.c
-    sword_to_offer/link_list/reverse_linklist.c
+    sto/link_list/reverse_linklist.c
 )
 
 target_link_libraries(code_repo m)

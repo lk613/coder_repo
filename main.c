@@ -3,7 +3,7 @@
 #include "quick_sort.h"
 #include "sort_alg/QuickSort/quick_sort.h"
 #include "matrix_lib/matrix.h"
-#include "sword_to_offer/link_list/reverse_linklist.h"
+#include "sto/link_list/reverse_linklist.h"
 
 #define ARRAY_MAX_NUM 10
 
