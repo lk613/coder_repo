@@ -368,3 +368,19 @@ int MatrixAdd(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst)
 
     return 0;
 }
+
+int MatrixCopy(matrix *mtx_src, matrix *mtx_dst)
+{
+    int row_idx;
+    int col_idx;
+
+    for (row_idx = 0; row_idx < mtx_dst->row; row_idx++)
+    {
+        for (col_idx = 0; col_idx < mtx_dst->col; col_idx++)
+        {
+            mtx_dst->data[row_idx * mtx_dst->col + col_idx] = mtx_src->data[row_idx * mtx_src->col + col_idx];
+        }
+    }
+
+    return 0;
+}
