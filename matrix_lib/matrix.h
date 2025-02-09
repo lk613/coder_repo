@@ -38,6 +38,8 @@ int MatrixRowScale(matrix *mtx_src, matrix *scale_vector, matrix *mtx_dst);
 
 int MatrixWgtMulErrMulErrT(matrix *mtx_wgt, matrix *mtx_err, matrix *mtx_dst);
 
+int MatrixAdd(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst);
+
 // void MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
 
 void MatrixPrint(matrix *mtx);

@@ -343,3 +343,28 @@ int MatrixWgtMulErrMulErrT(matrix *mtx_wgt, matrix *mtx_err, matrix *mtx_dst)
 
     return 1;
 }
+
+int MatrixAdd(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst)
+{
+
+#ifdef MATRIX_DEBUG
+    if ((mtx_a->row != mtx_b->row) || (mtx_a->col != mtx_b->col))
+    {
+        printf("Error: mtx_a and mtx_b is not a valid matrix\n");
+        return ERROR_MATRIX_SIZE_NOT_MATCH;
+    }
+#endif
+
+    int row_idx;
+    int col_idx;
+
+    for (row_idx = 0; row_idx < mtx_dst->row; row_idx++)
+    {
+        for (col_idx = 0; col_idx < mtx_dst->col; col_idx++)
+        {
+            mtx_dst->data[row_idx * mtx_dst->col + col_idx] = mtx_a->data[row_idx * mtx_a->col + col_idx] + mtx_b->data[row_idx * mtx_b->col + col_idx];
+        }
+    }
+
+    return 0;
+}
