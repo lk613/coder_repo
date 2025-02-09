@@ -14,6 +14,7 @@
 #define ERROR_MATRIX_DATA_NULL -4
 #define ERROR_MATRIX_NOT_SQUARE_MTX -5
 #define ERROR_MATRIX_OPPORATION_INVALID -6
+#define ERROR_MATRIX_SIZE_NOT_MATCH -7
 typedef struct matrix
 {
     int row;
@@ -34,6 +35,8 @@ int MatrixRowVectorMulMatrix(matrix *mtx_vec, matrix *mtx_src, matrix *mtx_dst);
 int MatrixSubVectorMtx(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst);
 
 int MatrixRowScale(matrix *mtx_src, matrix *scale_vector, matrix *mtx_dst);
+
+int MatrixWgtMulErrMulErrT(matrix *mtx_wgt, matrix *mtx_err, matrix *mtx_dst);
 
 // void MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
 

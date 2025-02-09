@@ -301,3 +301,45 @@ void MatrixPrint(matrix *mtx)
     
     return;
 }
+
+/**
+ * @brief A x B x B^T
+ * 
+ * @param mtx_wgt : [1 x n]
+ * @param mtx_err : [n x 2n+1]
+ * @param mtx_dst : [n x n]
+ * @return int 
+ */
+int MatrixWgtMulErrMulErrT(matrix *mtx_wgt, matrix *mtx_err, matrix *mtx_dst)
+{
+#ifdef MATRIX_DEBUG
+    if (mtx_wgt->row != 1)
+    {
+        printf("Error: mtx_wgt is not a row vector\n");
+        return ERROR_MATRIX_SIZE_NOT_MATCH;
+    }
+
+    if (mtx_wgt->col != mtx_err->col)
+    {
+        printf("Error: mtx_wgt and mtx_err is not a valid matrix\n");
+        return ERROR_MATRIX_SIZE_NOT_MATCH;
+    }
+#endif
+    
+    int i;
+    int j;
+    int k;
+
+    for (i = 0; i < mtx_dst->row; i++)
+    {
+        for (j = 0; j < mtx_dst->col; j++)
+        {
+            for (k = 0; k < mtx_wgt->col; k++)
+            {
+                mtx_dst->data[i * mtx_dst->col + j] += mtx_wgt->data[k] * mtx_err->data[k * mtx_err->col + i] * mtx_err->data[k * mtx_err->col + j];
+            }
+        }
+    }
+
+    return 1;
+}

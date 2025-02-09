@@ -19,6 +19,7 @@ add_executable(code_repo
     sto/link_list/reverse_linklist.c
     sto/array/two_sum.c
     sto/array/hash_table.c
+    sto/array/three_sum_zero.c
 )
 
 target_link_libraries(code_repo m)

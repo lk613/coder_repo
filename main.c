@@ -358,6 +358,46 @@ static void TestMatrixRowScale()
 
 }
 
+static void TestMatrixWgtMulErrMulErrT()
+{
+    matrix mtx_row_vec;
+    matrix mtx_err;
+
+    int row_num_a = 1;
+    int col_num_a = 5;
+    float mtx_a_data[5] = {0.1, 0.2, 0.2, 0.2, 0.3};
+    mtx_row_vec.row = row_num_a;
+    mtx_row_vec.col = col_num_a;
+    mtx_row_vec.data = mtx_a_data;
+
+    int row_num_b = 2;
+    int col_num_b = 5;
+    float mtx_b_data[10] = {
+        1, 2, 3, 4, 5,
+        6, 7, 8, 9, 10
+    };
+
+    mtx_err.row = row_num_b;
+    mtx_err.col = col_num_b;
+    mtx_err.data = mtx_b_data;
+
+    printf("Matrix row vector: \n");
+    MatrixPrint(&mtx_row_vec);
+
+    printf("Matrix error: \n");
+    MatrixPrint(&mtx_err);
+
+    matrix mtx_dst;
+    float *a_mul_b_mul_bt = (float *)malloc(row_num_b * row_num_b * sizeof(float));
+    mtx_dst.row = row_num_b;
+    mtx_dst.col = row_num_b;
+    mtx_dst.data = a_mul_b_mul_bt;
+    MatrixWgtMulErrMulErrT(&mtx_row_vec, &mtx_err, &mtx_dst);
+    printf("Matrix a_mul_b_mul_bt: \n");
+    MatrixPrint(&mtx_dst);
+    free(a_mul_b_mul_bt);
+}
+
 static void TestTwoDataSum()
 {
     int arr[6] = {1, 2, 2, 3, 4, 5};
@@ -408,6 +448,8 @@ int main(){
     PrintArray(arr, ARRAY_MAX_NUM);
 #endif
 
+    /**********************test matrix********************** */
+
     // TestMatrixTrans();
 
     // TestReverseList();
@@ -423,9 +465,13 @@ int main(){
     // TestMatrixRowScale();
 
     // TestMatrixSubVectorMtx();
+    
+    TestMatrixWgtMulErrMulErrT();
+    /**********************test matrix********************** */
+
 
     /**********************test sto********************** */
-    TestTwoDataSum();
+    // TestTwoDataSum();
     /**********************test sto********************** */
 
     return 0;
