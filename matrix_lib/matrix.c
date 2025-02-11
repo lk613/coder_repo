@@ -384,3 +384,75 @@ int MatrixCopy(matrix *mtx_src, matrix *mtx_dst)
 
     return 0;
 }
+
+int MatrixTrans(matrix *mtx_src, matrix *mtx_dst)
+{
+#ifdef MATRIX_DEBUG
+    if ((mtx_src->row < 1) || (mtx_src->col < 1) || (mtx_dst->row < 1) || (mtx_dst->col < 1))
+    {
+        printf("MATRIX INPUT SIZE INVALID !\n");
+        return ERROR_MATRIX_OPPORATION_INVALID;
+    }
+
+    if ((mtx_src->data == NULL) || (mtx_dst->data == NULL))
+    {
+        printf("MATRIX IS NULL ! \n");
+        return ERROR_MATRIX_DATA_NULL;
+    }
+#endif
+
+    int row_num = mtx_src->row;
+    int col_num = mtx_src->col;
+    int row_idx, col_idx;
+
+    for (row_idx = 0; row_idx < row_num; row_idx++)
+    {
+        for (col_idx = 0; col_idx < col_num; col_idx++)
+        {
+            mtx_dst->data[col_idx * row_num + row_idx] = mtx_src->data[row_idx * col_num + col_idx];
+        }
+    }
+
+    return 0;
+}
+
+
+int MatrixMultiply(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst)
+{
+#ifdef MATRIX_DEBUG
+    if ((mtx_a->row < 1) || (mtx_a->col < 1) || (mtx_b->row < 1) || (mtx_b->col < 1))
+    {
+        return ERROR_MATRIX_SIZE_NOT_MATCH;
+    }
+
+    if (mtx_a->col != mtx_b->row)
+    {
+        return ERROR_MATRIX_SIZE_NOT_MATCH;
+    }
+
+    if ((mtx_a->data == NULL) || (mtx_b->data == NULL))
+    {
+        return ERROR_MATRIX_DATA_NULL;
+    }
+#endif
+
+    int row_num = mtx_a->row;
+    int col_num = mtx_b->col;
+    int row_idx, col_idx, k;
+    float sum;
+    
+    for (row_idx = 0; row_idx < row_num; row_idx++)
+    {
+        for (col_idx = 0; col_idx < col_num; col_idx++)
+        {
+            sum = 0.f;
+            for (k = 0; k < mtx_a->col; k++)
+            {
+                sum += mtx_a->data[row_idx * mtx_a->col + k] * mtx_b->data[k * col_num + col_idx];
+            }
+            mtx_dst->data[row_idx * col_num + col_idx] = sum;
+        }
+    }
+
+    return 0;
+}

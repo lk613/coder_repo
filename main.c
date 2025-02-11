@@ -25,6 +25,7 @@ static void PrintArray(int *input_array, int array_size)
     printf("\n");
 }
 
+#if 1
 static void TestMatrixTrans()
 {
     matrix mtx_src;
@@ -51,9 +52,55 @@ static void TestMatrixTrans()
     printf("before transform, mtx_src is: \n");
     MatrixPrint(&mtx_src);
 
-    // MatrixTrans(&mtx_src, &mtx_dst);
-    // printf("\nafter transform, mtx_dst is: \n");
-    // MatrixPrint(&mtx_dst);
+    MatrixTrans(&mtx_src, &mtx_dst);
+    printf("\nafter transform, mtx_dst is: \n");
+    MatrixPrint(&mtx_dst);
+}
+#endif
+
+static void TestMatrixMultiply()
+{
+    matrix mtx_a;
+    matrix mtx_b;
+    matrix mtx_dst;
+
+    int row = 3;
+    int col = 4;
+
+    float data_a[12] = {
+        1.0, 2.0, 3.0, 4.0,
+        5.0, 23.7, 7.0, 8.0,
+        9.0, 10.0, 1.5, 12.0
+    };
+
+    mtx_a.row = row;
+    mtx_a.col = col;
+    mtx_a.data = data_a;
+
+    float data_b[12] = {
+        1.0, 1.0, 2.0,
+        2.0, 3.0, 5.0,
+        10.0, 23.0, 4.0,
+        3.0, 5.0, 10.0
+    };
+    mtx_b.row = col;
+    mtx_b.col = row;
+    mtx_b.data = data_b;
+
+    mtx_dst.row = 3;
+    mtx_dst.col = 3;
+    mtx_dst.data = (float *)malloc(9 * sizeof(float));
+
+    printf("mtx a: \n");
+    MatrixPrint(&mtx_a);
+
+    printf("mtx b: \n");
+    MatrixPrint(&mtx_b);
+
+    MatrixMultiply(&mtx_a, &mtx_b, &mtx_dst);
+
+    printf("mtx dst: \n");
+    MatrixPrint(&mtx_dst);
 }
 
 static void TestReverseList()
@@ -398,6 +445,36 @@ static void TestMatrixWgtMulErrMulErrT()
     free(a_mul_b_mul_bt);
 }
 
+#if 0
+static void TestMatrixTrans()
+{
+    matrix mtx_src;
+    matrix mtx_trans;
+
+    int row_num = 1;
+    int col_num = 5;
+    float matrix_data[5] = {1, 2, 3, 4, 5};
+    mtx_src.row = row_num;
+    mtx_src.col = col_num;
+    mtx_src.data = matrix_data;
+
+    int row_num_t = col_num;
+    int col_num_t = row_num;
+    // float mtx_trans_data[5];
+    mtx_trans.row = row_num_t;
+    mtx_trans.col = col_num_t;
+    mtx_trans.data = (float *)malloc(row_num_t * col_num_t * sizeof(float));
+
+    printf("Matrix src: \n");
+    MatrixPrint(&mtx_src);
+
+    MatrixTrans(&mtx_src, &mtx_trans);
+
+    printf("Matrix trans: \n");
+    MatrixPrint(&mtx_trans);
+}
+#endif
+
 static void TestTwoDataSum()
 {
     int arr[6] = {1, 2, 2, 3, 4, 5};
@@ -466,7 +543,12 @@ int main(){
 
     // TestMatrixSubVectorMtx();
     
-    TestMatrixWgtMulErrMulErrT();
+    // TestMatrixWgtMulErrMulErrT();
+
+    // TestMatrixTrans();
+
+    TestMatrixMultiply();
+
     /**********************test matrix********************** */
 
 

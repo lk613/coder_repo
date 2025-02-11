@@ -42,7 +42,9 @@ int MatrixAdd(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst);
 
 int MatrixCopy(matrix *mtx_src, matrix *mtx_dst);
 
-// void MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
+int MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
+
+int MatrixMultiply(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst);
 
 void MatrixPrint(matrix *mtx);
 
