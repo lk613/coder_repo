@@ -502,6 +502,38 @@ static void TestTwoDataSum()
     }
 }
 
+static void TestMatrixDeterminant()
+{
+    matrix mtx_src;
+#if 1
+    float mtx_array[9] = 
+    {
+        6, 12, 3,
+        3, 4, 5,
+        5, 6, 7
+    };
+
+    mtx_src.row = 3;
+    mtx_src.col = 3;
+    mtx_src.data = mtx_array;
+#else
+    float mtx_array[1] = 
+    {
+        3
+    };
+
+    mtx_src.row = 1;
+    mtx_src.col = 1;
+    mtx_src.data = mtx_array;
+#endif
+    printf("Matrix src: \n");
+    MatrixPrint(&mtx_src);
+
+    int order = 3;
+    float det = determinant(&mtx_src, order);
+
+    printf("Matrx src det is:  %.3f\n", det);
+}
 
 int main(){
 #if 0
@@ -545,9 +577,11 @@ int main(){
     
     // TestMatrixWgtMulErrMulErrT();
 
+    TestMatrixDeterminant();
+
     // TestMatrixTrans();
 
-    TestMatrixMultiply();
+    // TestMatrixMultiply();
 
     /**********************test matrix********************** */
 

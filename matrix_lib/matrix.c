@@ -456,3 +456,57 @@ int MatrixMultiply(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst)
 
     return 0;
 }
+
+/**
+ * @brief calculate matrix determiant
+ * 
+ * @param mtx 
+ * @param order 
+ * @return float 
+ */
+float determinant(matrix *mtx, int order)
+{
+    static float cofactor_array[4];
+    float det;
+    int m, i, j;
+
+    det = 0;
+    if (1 == order)
+    {
+        det = mtx->data[0];
+    }else if (2 == order)
+    {
+        det = mtx->data[3] * mtx->data[0] - mtx->data[1] * mtx->data[2];
+    }else
+    {
+        int n_order = order - 1;
+        matrix mtx_tmp;
+        MatrixInit(&mtx_tmp, &n_order, &n_order, cofactor_array);
+
+        for (m = 0; m < order; m++)
+        {
+            int cur_i = 0;
+            for (i = 1; i < order; i++)
+            {
+                int cur_j = 0;
+                for (j = 0; j < order; j++)
+                {
+                    if (j != m)
+                    {
+                        mtx_tmp.data[cur_i * mtx_tmp.col + cur_j] = mtx->data[i * mtx->col + j];
+                        cur_j++;
+                    }
+                }
+                cur_i++;
+            }
+
+            det += ((m % 2 == 1) ? -1 : 1) * mtx->data[0 * mtx->col + m] * determinant(&mtx_tmp, order - 1);
+        }
+    }
+
+    return det;
+}
+
+
+int MatrixInverse(matrix *mtx_src, matrix *mtx_dst);
+

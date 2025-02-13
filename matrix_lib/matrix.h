@@ -15,6 +15,8 @@
 #define ERROR_MATRIX_NOT_SQUARE_MTX -5
 #define ERROR_MATRIX_OPPORATION_INVALID -6
 #define ERROR_MATRIX_SIZE_NOT_MATCH -7
+
+#define MTX_DET_ORD 3
 typedef struct matrix
 {
     int row;
@@ -47,5 +49,9 @@ int MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
 int MatrixMultiply(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst);
 
 void MatrixPrint(matrix *mtx);
+
+float determinant(matrix *mtx, int order);
+
+int MatrixInverse(matrix *mtx_src, matrix *mtx_dst);
 
 #endif
