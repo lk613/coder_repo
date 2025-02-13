@@ -530,7 +530,7 @@ static void TestMatrixDeterminant()
     MatrixPrint(&mtx_src);
 
     int order = 3;
-    float det = determinant(&mtx_src, order);
+    float det = determinant(&mtx_src, &order);
 
     printf("Matrx src det is:  %.3f\n", det);
 }

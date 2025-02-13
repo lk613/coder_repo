@@ -50,7 +50,11 @@ int MatrixMultiply(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst);
 
 void MatrixPrint(matrix *mtx);
 
-float determinant(matrix *mtx, int order);
+float determinant(matrix *mtx, int *order);
+
+void GetCofactor(matrix *mtx_src, int *row, int *col, int *order, matrix *mtx_dst);
+
+void MatrixAdjugate(matrix *mtx_src, int *order, matrix *mtx_dst);
 
 int MatrixInverse(matrix *mtx_src, matrix *mtx_dst);
 

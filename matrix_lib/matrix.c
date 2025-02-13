@@ -464,32 +464,33 @@ int MatrixMultiply(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst)
  * @param order 
  * @return float 
  */
-float determinant(matrix *mtx, int order)
+float determinant(matrix *mtx, int *order)
 {
     static float cofactor_array[4];
     float det;
     int m, i, j;
+    int order_t;
 
     det = 0;
-    if (1 == order)
+    if (1 == *order)
     {
         det = mtx->data[0];
-    }else if (2 == order)
+    }else if (2 == *order)
     {
         det = mtx->data[3] * mtx->data[0] - mtx->data[1] * mtx->data[2];
     }else
     {
-        int n_order = order - 1;
+        int n_order = *order - 1;
         matrix mtx_tmp;
         MatrixInit(&mtx_tmp, &n_order, &n_order, cofactor_array);
 
-        for (m = 0; m < order; m++)
+        for (m = 0; m < *order; m++)
         {
             int cur_i = 0;
-            for (i = 1; i < order; i++)
+            for (i = 1; i < *order; i++)
             {
                 int cur_j = 0;
-                for (j = 0; j < order; j++)
+                for (j = 0; j < *order; j++)
                 {
                     if (j != m)
                     {
@@ -499,14 +500,108 @@ float determinant(matrix *mtx, int order)
                 }
                 cur_i++;
             }
-
-            det += ((m % 2 == 1) ? -1 : 1) * mtx->data[0 * mtx->col + m] * determinant(&mtx_tmp, order - 1);
+            
+            order_t = *order - 1;
+            det += ((m % 2 == 1) ? -1 : 1) * mtx->data[0 * mtx->col + m] * determinant(&mtx_tmp, &order_t);
         }
     }
 
     return det;
 }
 
+/**
+ * @brief Get the Cofactor object
+ * 
+ * @param mtx_src 
+ * @param row 
+ * @param col 
+ * @param order 
+ * @param mtx_dst 
+ */
+void GetCofactor(matrix *mtx_src, int *row, int *col, int *order, matrix *mtx_dst)
+{
+    int cur_i, cur_j;
+    int row_idx, col_idx;
+    cur_i = 0, cur_j = 0;
 
-int MatrixInverse(matrix *mtx_src, matrix *mtx_dst);
+    for (row_idx = 0; row_idx < *order; row_idx++)
+    {
+        for (col_idx = 0; col_idx < *order; col_idx++)
+        {
+            if ((row_idx != *row) && (col_idx != *col))
+            {
+                mtx_dst->data[cur_i * mtx_dst->col + cur_j] = mtx_src->data[row_idx * mtx_src->col + col_idx];
+                if (cur_j == (*order - 1))
+                {
+                    cur_j = 0;
+                    cur_i++;        /* break inside for loop*/
+                }
+            }
+        }
+    }
+}
+
+/**
+ * @brief calculate matrix adjugate matrix;
+ * 
+ * @param mtx_src 
+ * @param mtx_dst 
+ */
+void MatrixAdjugate(matrix *mtx_src, int *order, matrix *mtx_dst)
+{
+    if (1 == (*order))
+    {
+        mtx_dst->data[0] = mtx_src->data[0];
+        return;
+    }
+
+    int det_tmp;
+    int sign;
+    float mtx_arr_t[4];
+    matrix mtx_temp;
+    int order_t = (*order) - 1;
+    MatrixInit(&mtx_temp, &order_t, &order_t, mtx_arr_t);
+
+    int row_idx, col_idx;
+    for (row_idx = 0; row_idx < *order; row_idx++)
+    {
+        for(col_idx = 0; col_idx < *order; col_idx++)
+        {
+            GetCofactor(mtx_src, &row_idx, &col_idx, order, &mtx_temp);
+            sign = ((row_idx + col_idx) % 2 == 0) ? 1 : -1;
+            /*mtx[j][i] = (-1)^(i+j) * det */
+            mtx_dst->data[col_idx * mtx_src->col + row_idx] = sign * determinant(&mtx_temp, &order_t);
+        }
+    }
+}
+
+int MatrixInverse(matrix *mtx_src, matrix *mtx_dst)
+{
+    int order;
+    int det;
+    float det_recip;
+    int row_idx, col_idx;
+    matrix mtx_tmp;
+    float mtx_arr[9] = {0};
+
+    order = 3;
+    det = determinant(mtx_src, &order);
+    if (0 == det)
+    {
+        printf("Input matrix cant be inversed ! \n");
+        return -1;
+    }
+
+    MatrixInit(&mtx_tmp, &order, &order, mtx_arr);
+    MatrixAdjugate(mtx_src, &order, &mtx_tmp);
+    det_recip = 1.f / det;
+
+    for (row_idx = 0; row_idx < order; row_idx++)
+    {
+        for (col_idx = 0; col_idx < order; col_idx++)
+        {
+            mtx_dst->data[row_idx * mtx_dst->col + col_idx] = det_recip * mtx_tmp.data[row_idx * mtx_tmp.col + col_idx];
+        }
+    }
+}
 
