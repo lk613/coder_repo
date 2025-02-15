@@ -369,6 +369,33 @@ int MatrixAdd(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst)
     return 0;
 }
 
+int MatrixSubtraction(matrix *mtx_a, matrix *mtx_b, matrix *mtx_diff)
+{
+#ifdef MATRIX_DEBUG
+    if (mtx_a->row != mtx_b->row || mtx_a->col != mtx_b->col)
+    {
+        printf("Matrix size unmatch for matrix substraction ! \n");
+        return ERROR_MATRIX_SIZE_NOT_MATCH;
+    }
+#endif
+
+    int row_idx, col_idx;
+    int row_num, col_num;
+
+    row_num = mtx_a->row;
+    col_num = mtx_b->col;
+
+    for (row_idx = 0; row_idx < row_num; row_idx++)
+    {
+        for (col_idx = 0; col_idx < col_num; col_idx++)
+        {
+            mtx_diff->data[row_idx * mtx_a->col + col_idx] = mtx_a->data[row_idx * mtx_a->col + col_idx] + mtx_b->data[row_idx * mtx_b->col + col_idx];
+        }
+    }
+
+    return 0;
+}
+
 int MatrixCopy(matrix *mtx_src, matrix *mtx_dst)
 {
     int row_idx;

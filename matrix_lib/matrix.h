@@ -46,6 +46,8 @@ int MatrixWgtMulErrMulErrT(matrix *mtx_wgt, matrix *mtx_err, matrix *mtx_dst);
 
 int MatrixAdd(matrix *mtx_a, matrix *mtx_b, matrix *mtx_dst);
 
+int MatrixSubtraction(matrix *mtx_a, matrix *mtx_b, matrix *mtx_diff);
+
 int MatrixCopy(matrix *mtx_src, matrix *mtx_dst);
 
 int MatrixTrans(matrix *mtx_src, matrix *mtx_dst);
