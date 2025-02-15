@@ -535,6 +535,56 @@ static void TestMatrixDeterminant()
     printf("Matrx src det is:  %.3f\n", det);
 }
 
+static void TestMatrixInverse()
+{
+    matrix mtx_src;
+    matrix mtx_dst;
+
+#if 1
+    float src_array[9] = {
+        1, 2, 3,
+        2, 4, 6, 
+        3, 6, 9
+    };
+
+    int mtx_order = 3;
+    mtx_src.row = mtx_order;
+    mtx_src.col = mtx_order;
+    mtx_src.data = src_array;
+
+    float *dst_address = (float *)malloc(mtx_order * mtx_order * sizeof(float));
+    mtx_dst.row = mtx_order;
+    mtx_dst.col = mtx_order;
+    mtx_dst.data = dst_address;
+#else
+    float src_array[9] = {
+        1, 2, 3,
+        0, 1, 4,
+        5, 6, 0
+    };
+
+    int mtx_order = 3;
+    mtx_src.row = mtx_order;
+    mtx_src.col = mtx_order;
+    mtx_src.data = src_array;
+
+    float *dst_address = (float *)malloc(mtx_order * mtx_order * sizeof(float));
+    mtx_dst.row = mtx_order;
+    mtx_dst.col = mtx_order;
+    mtx_dst.data = dst_address;
+#endif
+
+    printf("Matrix src is:  \n");
+    MatrixPrint(&mtx_src);
+
+    MatrixInverse(&mtx_src, &mtx_dst);
+
+    printf("Matrix src inverse matrix is: \n");
+    MatrixPrint(&mtx_dst);
+
+    free(dst_address);
+}
+
 int main(){
 #if 0
     printf("Hello, from code_repo!\n");
@@ -577,7 +627,9 @@ int main(){
     
     // TestMatrixWgtMulErrMulErrT();
 
-    TestMatrixDeterminant();
+    // TestMatrixDeterminant();
+
+    TestMatrixInverse();
 
     // TestMatrixTrans();
 

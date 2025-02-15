@@ -530,7 +530,7 @@ void GetCofactor(matrix *mtx_src, int *row, int *col, int *order, matrix *mtx_ds
         {
             if ((row_idx != *row) && (col_idx != *col))
             {
-                mtx_dst->data[cur_i * mtx_dst->col + cur_j] = mtx_src->data[row_idx * mtx_src->col + col_idx];
+                mtx_dst->data[cur_i * mtx_dst->col + cur_j++] = mtx_src->data[row_idx * mtx_src->col + col_idx];
                 if (cur_j == (*order - 1))
                 {
                     cur_j = 0;
@@ -549,6 +549,14 @@ void GetCofactor(matrix *mtx_src, int *row, int *col, int *order, matrix *mtx_ds
  */
 void MatrixAdjugate(matrix *mtx_src, int *order, matrix *mtx_dst)
 {
+#ifdef MATRIX_DEBUG
+    if (mtx_src->row != mtx_src->col)
+    {
+        printf("INPUT MATRIX MUST SQUARE MATRIX !\n");
+        return;
+    }
+#endif
+
     if (1 == (*order))
     {
         mtx_dst->data[0] = mtx_src->data[0];
@@ -557,7 +565,7 @@ void MatrixAdjugate(matrix *mtx_src, int *order, matrix *mtx_dst)
 
     int det_tmp;
     int sign;
-    float mtx_arr_t[4];
+    float mtx_arr_t[4] = {0};
     matrix mtx_temp;
     int order_t = (*order) - 1;
     MatrixInit(&mtx_temp, &order_t, &order_t, mtx_arr_t);
@@ -573,10 +581,28 @@ void MatrixAdjugate(matrix *mtx_src, int *order, matrix *mtx_dst)
             mtx_dst->data[col_idx * mtx_src->col + row_idx] = sign * determinant(&mtx_temp, &order_t);
         }
     }
+#ifdef CODE_DEBUG
+    printf("mtx src adj matrix is: \n");
+    MatrixPrint(mtx_dst);
+#endif
 }
 
+/**
+ * @brief calculate source matrix inverse matrix\
+ * @param mtx_src : source matrix
+ * @param mtx_dst : inverse matrix result
+ * @result int 
+ */
 int MatrixInverse(matrix *mtx_src, matrix *mtx_dst)
 {
+#ifdef MATRIX_DEBUG
+    if (mtx_src->row != mtx_src->col)
+    {
+        printf("INPUT MATRIX MUST SQUARE MATRIX !\n");
+        return -1;
+    }
+#endif
+
     int order;
     int det;
     float det_recip;
@@ -588,12 +614,26 @@ int MatrixInverse(matrix *mtx_src, matrix *mtx_dst)
     det = determinant(mtx_src, &order);
     if (0 == det)
     {
-        printf("Input matrix cant be inversed ! \n");
+        printf("mtx_src det value is: 0 . Input matrix cant be inversed ! \n");
         return -1;
     }
 
     MatrixInit(&mtx_tmp, &order, &order, mtx_arr);
+
+#ifdef CODE_DEBUG
+    printf("mtx_src is: \n");
+    MatrixPrint(mtx_src);
+    printf("mtx_tmp init is: \n");
+    MatrixPrint(&mtx_tmp);
+#endif
+
     MatrixAdjugate(mtx_src, &order, &mtx_tmp);
+
+#ifdef CODE_DEBUG
+    printf("mtx_tmp matrix is adj matrix for mtx_src: \n");
+    MatrixPrint(&mtx_tmp);
+#endif
+
     det_recip = 1.f / det;
 
     for (row_idx = 0; row_idx < order; row_idx++)
@@ -603,5 +643,12 @@ int MatrixInverse(matrix *mtx_src, matrix *mtx_dst)
             mtx_dst->data[row_idx * mtx_dst->col + col_idx] = det_recip * mtx_tmp.data[row_idx * mtx_tmp.col + col_idx];
         }
     }
+
+#ifdef CODE_DEBUG
+    printf("mtx_src inverse matrix is: \n");
+    MatrixPrint(mtx_dst);
+#endif
+
+    return 0;
 }
 

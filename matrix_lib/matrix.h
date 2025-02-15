@@ -4,6 +4,10 @@
 #include <math.h>
 #include <string.h>
 
+#ifndef CODE_DEBUG
+#define CODE_DEBUG
+#endif
+
 #ifndef MATRIX_DEBUG
 #define MATRIX_DEBUG
 #endif
