@@ -3,6 +3,8 @@
 #include "quick_sort.h"
 #include "sort_alg/QuickSort/quick_sort.h"
 #include "matrix_lib/matrix.h"
+#include "sto/link_list/list_node.h"
+#include "sto/link_list/delete_inverse_kth.h"
 #include "sto/link_list/reverse_linklist.h"
 #include "sto/array/two_sum.h"
 
@@ -502,6 +504,24 @@ static void TestTwoDataSum()
     }
 }
 
+static void TestDelInvKth()
+{
+    int array[8] = {2, 15, 3, 8, 11, 23, 7, 9};
+    printf("Create List Node ...\n");
+    ListNode *pHead = GenerateList(array, 8);
+    printf("Source List Node is:  \n");
+    PrintList(pHead);
+
+    int kth = 4;
+#ifdef LEETCODE_STYLE
+    removeNthFromEnd(pHead, kth);
+#else
+    DeleteInverseKth(pHead, kth);
+#endif
+    printf("Delete ListList inverse %d node, LinkList is: \n", kth);
+    PrintList(pHead);
+}
+
 static void TestMatrixDeterminant()
 {
     matrix mtx_src;
@@ -629,7 +649,7 @@ int main(){
 
     // TestMatrixDeterminant();
 
-    TestMatrixInverse();
+    // TestMatrixInverse();
 
     // TestMatrixTrans();
 
@@ -640,6 +660,8 @@ int main(){
 
     /**********************test sto********************** */
     // TestTwoDataSum();
+
+    TestDelInvKth();
     /**********************test sto********************** */
 
     return 0;

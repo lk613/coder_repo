@@ -17,6 +17,8 @@ add_executable(code_repo
     sort_alg/QuickSort/quick_sort.c
     matrix_lib/matrix.c
     sto/link_list/reverse_linklist.c
+    sto/link_list/delete_inverse_kth.c
+    sto/link_list/list_node.c
     sto/array/two_sum.c
     sto/array/hash_table.c
     sto/array/three_sum_zero.c

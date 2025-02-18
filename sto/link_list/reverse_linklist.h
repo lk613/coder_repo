@@ -1,6 +1,10 @@
+#ifndef REVERSE_LINKLIST_H
+#define REVERSE_LINKLIST_H
+
 #include <stdio.h>
 #include <stdlib.h>
+#include "list_node.h"
 
-struct ListNode *GenerateList(int *arr, int len);
-void PrintList(struct ListNode *phead);
 struct ListNode *ReverseList(struct ListNode *head);
+
+#endif
