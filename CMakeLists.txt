@@ -21,6 +21,7 @@ add_executable(code_repo
     sto/link_list/list_node.c
     sto/link_list/detect_cycle_linklist.c
     sto/link_list/first_common_node.c
+    sto/link_list/add_linklist.c
     sto/array/two_sum.c
     sto/array/hash_table.c
     sto/array/three_sum_zero.c
