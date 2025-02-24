@@ -9,6 +9,7 @@ include_directories(
     matrix_lib
     sto/link_list
     sto/array
+    sto/stack
 )
 
 add_executable(code_repo 
@@ -25,6 +26,8 @@ add_executable(code_repo
     sto/array/two_sum.c
     sto/array/hash_table.c
     sto/array/three_sum_zero.c
+    sto/stack/stack_struct.c
+    sto/stack/suffix_expression.c
 )
 
 target_link_libraries(code_repo m)
