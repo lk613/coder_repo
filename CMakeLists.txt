@@ -10,6 +10,7 @@ include_directories(
     sto/link_list
     sto/array
     sto/stack
+    sto/queue
 )
 
 add_executable(code_repo 
@@ -28,6 +29,7 @@ add_executable(code_repo
     sto/array/three_sum_zero.c
     sto/stack/stack_struct.c
     sto/stack/suffix_expression.c
+    sto/queue/queue_struct.c
 )
 
 target_link_libraries(code_repo m)
