@@ -34,6 +34,7 @@ add_executable(code_repo
     sto/queue/slide_window.c
     sto/binary_search/binary_search.c
     sto/binary_search/search_peek.c
+    sto/binary_search/inverse_pairs.c
 )
 
 target_link_libraries(code_repo m)
