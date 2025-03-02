@@ -7,6 +7,7 @@
 #include "sto/link_list/delete_inverse_kth.h"
 #include "sto/link_list/reverse_linklist.h"
 #include "sto/array/two_sum.h"
+#include "sto/queue/slide_window.h"
 
 #ifndef TWO_SUM_BY_HASH_TABLE
 #define TWO_SUM_BY_HASH_TABLE
@@ -605,6 +606,21 @@ static void TestMatrixInverse()
     free(dst_address);
 }
 
+static void TestMaxWindow()
+{
+    int array[] = {2,3,4,2,6,2,5,1};
+    int win_size = 3;
+    printf("Source array is: \n");
+    PrintArr(array, 8);
+    printf("slide window size is: %d\n", win_size);
+    int reture_size;
+    int *ret_arr = maxInWindows(array, 8, win_size, &reture_size);
+
+    printf("Slide window max num array is: \n");
+    PrintArr(ret_arr, reture_size);
+}
+
+
 int main(){
 #if 0
     printf("Hello, from code_repo!\n");
@@ -661,8 +677,12 @@ int main(){
     /**********************test sto********************** */
     // TestTwoDataSum();
 
-    TestDelInvKth();
+    // TestDelInvKth();
     /**********************test sto********************** */
+
+    /**********************test queue********************** */
+    TestMaxWindow();
+    /**********************test queue********************** */
 
     return 0;
 }

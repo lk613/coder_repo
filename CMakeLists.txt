@@ -30,6 +30,7 @@ add_executable(code_repo
     sto/stack/stack_struct.c
     sto/stack/suffix_expression.c
     sto/queue/queue_struct.c
+    sto/queue/slide_window.c
 )
 
 target_link_libraries(code_repo m)
