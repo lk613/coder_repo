@@ -11,6 +11,7 @@ include_directories(
     sto/array
     sto/stack
     sto/queue
+    sto/binary_search
 )
 
 add_executable(code_repo 
@@ -31,6 +32,8 @@ add_executable(code_repo
     sto/stack/suffix_expression.c
     sto/queue/queue_struct.c
     sto/queue/slide_window.c
+    sto/binary_search/binary_search.c
+    sto/binary_search/search_peek.c
 )
 
 target_link_libraries(code_repo m)
