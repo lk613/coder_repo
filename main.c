@@ -8,6 +8,7 @@
 #include "sto/link_list/reverse_linklist.h"
 #include "sto/array/two_sum.h"
 #include "sto/queue/slide_window.h"
+#include "leetcode/695_岛屿最大面积/MaxAreaOfIsland.h"
 
 #ifndef TWO_SUM_BY_HASH_TABLE
 #define TWO_SUM_BY_HASH_TABLE
@@ -16,6 +17,7 @@
 #define ARRAY_MAX_NUM 10
 
 static void PrintArray(int *input_array, int array_size);
+static void PrintMatrix(int **matrix, int row, int col);
 static void TestMatrixTrans();
 
 static void PrintArray(int *input_array, int array_size)
@@ -24,6 +26,20 @@ static void PrintArray(int *input_array, int array_size)
     for (i = 0; i < array_size; i++)
     {
         printf("%d  ", input_array[i]);
+    }
+    printf("\n");
+}
+
+static void PrintMatrix(int **matrix, int row, int col)
+{
+    int i, j;
+    for (i = 0; i < row; i++)
+    {
+        for (j = 0; j < col; j++)
+        {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
     }
     printf("\n");
 }
@@ -620,6 +636,37 @@ static void TestMaxWindow()
     PrintArr(ret_arr, reture_size);
 }
 
+static void TestLeetcode695()
+{
+    int grid_array[8][13] = 
+                    {{0,0,1,0,0,0,0,1,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                    {0,1,1,0,1,0,0,0,0,0,0,0,0},
+                    {0,1,0,0,1,1,0,0,1,0,1,0,0},
+                    {0,1,0,0,1,1,0,0,1,1,1,0,0},
+                    {0,0,0,0,0,0,0,0,0,0,1,0,0},
+                    {0,0,0,0,0,0,0,1,1,1,0,0,0},
+                    {0,0,0,0,0,0,0,1,1,0,0,0,0}};
+
+    int **grid = (int **)malloc(8 * 13 * sizeof(int));
+    for (int i = 0; i < 8; i++)
+    {
+        grid[i] = (int *)malloc(13 * sizeof(int));
+        for (int j = 0; j < 13; j++)
+        {
+            grid[i][j] = grid_array[i][j];
+        }
+    }
+
+    PrintMatrix(grid, 8, 13);
+    int gridSize = 8;
+    int gridColSize = 13;
+    // int **grid = (int **)malloc(gridSize * gridColSize * sizeof(int));
+
+    int ret = maxAreaOfIsland(grid, gridSize, &gridColSize);
+    printf("Max area of island is: %d\n", ret);
+}
+
 
 int main(){
 #if 0
@@ -681,8 +728,13 @@ int main(){
     /**********************test sto********************** */
 
     /**********************test queue********************** */
-    TestMaxWindow();
+    // TestMaxWindow();
     /**********************test queue********************** */
+
+
+    /**********************test leetcode********************** */
+    TestLeetcode695();
+    /**********************test leetcode********************** */
 
     return 0;
 }

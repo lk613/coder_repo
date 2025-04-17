@@ -12,6 +12,8 @@ include_directories(
     sto/stack
     sto/queue
     sto/binary_search
+    leetcode/695_岛屿最大面积
+    leetcode/76_最小覆盖子串
 )
 
 add_executable(code_repo 
@@ -35,6 +37,7 @@ add_executable(code_repo
     sto/binary_search/binary_search.c
     sto/binary_search/search_peek.c
     sto/binary_search/inverse_pairs.c
+    leetcode/695_岛屿最大面积/MaxAreaOfIsland.c
 )
 
 target_link_libraries(code_repo m)
