@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "reverse_linklist.h": "c"
+        "reverse_linklist.h": "c",
+        "vector": "cpp"
     }
 }

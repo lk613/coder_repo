@@ -12,15 +12,15 @@ int Bfs(std::vector<std::vector<int>> &grid, int row_idx, int col_idx)
 
     que_rows.push(row_idx);
     que_cols.push(col_idx);
+    grid[row_idx][col_idx] = 0; // 标记为已访问
 
     while (!que_rows.empty())
     {
-        ret += 1;
         int cur_row = que_rows.front();
         int cur_col = que_cols.front();
         que_rows.pop();
         que_cols.pop();
-        grid[cur_row][cur_col] = 0; // 标记为已访问
+        ret++;
 
         for (int i = 0; i < 4; i++)
         {
@@ -36,6 +36,7 @@ int Bfs(std::vector<std::vector<int>> &grid, int row_idx, int col_idx)
             {
                 que_rows.push(i_row);
                 que_cols.push(i_col);
+                grid[i_row][i_col] = 0; // 标记为已访问
             }
         }
     }
