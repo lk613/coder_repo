@@ -8,12 +8,16 @@ include_directories(
     leetcode/695_岛屿最大面积
     leetcode/76_最小覆盖子串
     leetcode/104_二叉树最大深度
+    sort/QuickSort
+    sort/BubbleSort
 )
 
 add_executable(code_repo 
     main.cpp
     leetcode/695_岛屿最大面积/MaxAreaOfIsland.cpp
     leetcode/104_二叉树最大深度/MaxDepthOfBinaryTree.cpp
+    sort/QuickSort/QuickSort.cpp
+    sort/BubbleSort/BubbleSort.cpp
 )
 
 target_link_libraries(code_repo m)

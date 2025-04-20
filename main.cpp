@@ -2,6 +2,8 @@
 #include <vector>
 #include "MaxAreaOfIsland.h"
 #include "MaxDepthOfBinaryTree.h"
+#include "QuickSort.h"
+
 
 static void PrintVector(std::vector<int> &vec)
 {
@@ -53,6 +55,9 @@ static void TestLeetCode_104()
 
 int main()
 {
-    TestLeetCode_104();
-    return 0;
+    // TestLeetCode_104();
+
+    TestQuickSort();
+
+    return 1;
 }
