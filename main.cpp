@@ -2,6 +2,7 @@
 #include <vector>
 #include "MaxAreaOfIsland.h"
 #include "MaxDepthOfBinaryTree.h"
+#include "NumOfIsland.h"
 
 static void PrintVector(std::vector<int> &vec)
 {
@@ -53,6 +54,8 @@ static void TestLeetCode_104()
 
 int main()
 {
-    TestLeetCode_104();
+    // TestLeetCode_104();
+    
+    TestLeetcode200();
     return 0;
 }
