@@ -9,4 +9,6 @@ using namespace std;
 int numIslands(vector<vector<int>> &grid);
 
 void TestLeetcode200();
+
+void TestLeetcode_200();
 #endif

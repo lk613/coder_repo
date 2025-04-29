@@ -1,5 +1,49 @@
 #include "NumOfIsland.h"
 
+#if 1
+void dfs(vector<vector<char>> &grid, int row_idx, int col_idx, int rows, int cols)
+{
+    if (row_idx < 0 || row_idx >= rows || col_idx < 0 || col_idx >= cols || grid[row_idx][col_idx] == '0')
+    {
+        return;
+    }
+
+    grid[row_idx][col_idx] = '0'; 
+
+    dfs(grid, row_idx - 1, col_idx, rows, cols);
+    dfs(grid, row_idx + 1, col_idx, rows, cols);
+    dfs(grid, row_idx, col_idx - 1, rows, cols);
+    dfs(grid, row_idx, col_idx + 1, rows, cols);
+
+}
+
+int numIslands(vector<vector<char>> &grid)
+{
+    if (grid.empty() || grid.size() <= 0)
+    {
+        return 0;
+    }
+
+    int rows = grid.size();
+    int cols = grid[0].size();
+    
+    int max_num = 0;
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            if (grid[i][j] == '1')
+            {
+                max_num += 1;
+                dfs(grid, i, j, rows, cols);
+            }
+        }
+    }
+
+    return max_num;
+}
+
+#else
 bool hasIsland(vector<vector<int>> &grid, int rows, int cols, int row_idx, int col_idx)
 {
     if (row_idx < 0 || row_idx >= rows || col_idx < 0 || col_idx >= cols || grid[row_idx][col_idx] == 0)
@@ -47,7 +91,6 @@ bool hasIsland(vector<vector<int>> &grid, int rows, int cols, int row_idx, int c
     return true;
 }
 
-
 int numIslands(vector<vector<int>> &grid)
 {
     if ((grid.size() == 0) || (grid[0].size() == 0))
@@ -72,7 +115,45 @@ int numIslands(vector<vector<int>> &grid)
 
     return island_num;
 }
+#endif
 
+void TestLeetcode_200()
+{
+#if 1
+    std::vector<std::vector<char>> grid_mtx = 
+    {
+        {'1','1','0','0','0'},
+        {'1','1','0','0','0'},
+        {'0','0','1','0','0'},
+        {'0','0','0','1','1'}
+    };
+#else
+    std::vector<std::vector<int>> grid_mtx = 
+    {
+        {1,1,1,1,0},
+        {1,1,0,1,0},
+        {1,1,0,0,0},
+        {0,0,0,0,0}
+    };
+#endif
+
+    std::cout << "grid is: " << std::endl;
+    for (int i = 0; i < grid_mtx.size(); i++)
+    {
+        for (int j = 0; j < grid_mtx[0].size(); j++)
+        {
+            std::cout << grid_mtx[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    int islands = numIslands(grid_mtx);
+
+    std::cout << "岛屿数量为:  " << islands << std::endl;
+
+}
+
+#if 0
 void TestLeetcode200()
 {
 #if 1
@@ -108,3 +189,4 @@ void TestLeetcode200()
     std::cout << "岛屿数量为:  " << islands << std::endl;
 
 }
+#endif
