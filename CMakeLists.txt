@@ -10,6 +10,8 @@ include_directories(
     leetcode/104_二叉树最大深度
     leetcode/200_岛屿数量
     leetcode/53_最大子数组和
+    leetcode/94_二叉树的中序遍历
+    
 )
 
 add_executable(code_repo 
@@ -18,6 +20,7 @@ add_executable(code_repo
     leetcode/104_二叉树最大深度/MaxDepthOfBinaryTree.cpp
     leetcode/200_岛屿数量/NumOfIsland.cpp
     leetcode/53_最大子数组和/MaxSubArray.cpp
+    leetcode/94_二叉树的中序遍历/InorderTraveral.cpp
 )
 
 target_link_libraries(code_repo m)
