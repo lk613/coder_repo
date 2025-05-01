@@ -14,6 +14,7 @@ include_directories(
     leetcode/102_二叉树层序遍历
     leetcode/226_翻转二叉树
     leetcode/101_对称二叉树
+    leetcode/206_反转链表
 )
 
 add_executable(code_repo 
@@ -26,6 +27,7 @@ add_executable(code_repo
     leetcode/102_二叉树层序遍历/LevelOrder.cpp
     leetcode/226_翻转二叉树/InvertTree.cpp
     leetcode/101_对称二叉树/Symmetric.cpp
+    leetcode/206_反转链表/InverseLinklist.cpp
 )
 
 target_link_libraries(code_repo m)
