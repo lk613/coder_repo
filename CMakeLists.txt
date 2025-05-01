@@ -11,7 +11,7 @@ include_directories(
     leetcode/200_岛屿数量
     leetcode/53_最大子数组和
     leetcode/94_二叉树的中序遍历
-    
+    leetcode/102_二叉树层序遍历
 )
 
 add_executable(code_repo 
@@ -21,6 +21,7 @@ add_executable(code_repo
     leetcode/200_岛屿数量/NumOfIsland.cpp
     leetcode/53_最大子数组和/MaxSubArray.cpp
     leetcode/94_二叉树的中序遍历/InorderTraveral.cpp
+    leetcode/102_二叉树层序遍历/LevelOrder.cpp
 )
 
 target_link_libraries(code_repo m)
