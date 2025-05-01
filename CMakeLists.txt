@@ -12,6 +12,8 @@ include_directories(
     leetcode/53_最大子数组和
     leetcode/94_二叉树的中序遍历
     leetcode/102_二叉树层序遍历
+    leetcode/226_翻转二叉树
+    leetcode/101_对称二叉树
 )
 
 add_executable(code_repo 
@@ -22,6 +24,8 @@ add_executable(code_repo
     leetcode/53_最大子数组和/MaxSubArray.cpp
     leetcode/94_二叉树的中序遍历/InorderTraveral.cpp
     leetcode/102_二叉树层序遍历/LevelOrder.cpp
+    leetcode/226_翻转二叉树/InvertTree.cpp
+    leetcode/101_对称二叉树/Symmetric.cpp
 )
 
 target_link_libraries(code_repo m)
