@@ -4,6 +4,7 @@
 #include "MaxDepthOfBinaryTree.h"
 #include "NumOfIsland.h"
 #include "MaxSubArray.h"
+#include "MergeSortedArray.h"
 
 static void PrintVector(std::vector<int> &vec)
 {
@@ -59,8 +60,11 @@ int main()
     
     // TestLeetcode200();
 
-    TestLeetcode_200();
+    // TestLeetcode_200();
     
     // TestLeetcode53();
+
+    TestLeetcode88();
+    
     return 0;
 }
