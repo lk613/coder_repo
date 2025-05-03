@@ -18,6 +18,7 @@ include_directories(
     leetcode/88_合并两个有序数组
     leetcode/26_删除数组中重复项
     leetcode/27_移除元素
+    leetcode/169_多数元素
 )
 
 add_executable(code_repo 
@@ -34,6 +35,7 @@ add_executable(code_repo
     leetcode/88_合并两个有序数组/MergeSortedArray.cpp
     leetcode/26_删除数组中重复项/RemoveDuplicates.cpp
     leetcode/27_移除元素/RemoveElements.cpp
+    leetcode/169_多数元素/MajorityElement.cpp
 )
 
 target_link_libraries(code_repo m)

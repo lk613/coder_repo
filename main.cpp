@@ -5,6 +5,7 @@
 #include "NumOfIsland.h"
 #include "MaxSubArray.h"
 #include "MergeSortedArray.h"
+#include "MajorityElement.h"
 
 static void PrintVector(std::vector<int> &vec)
 {
@@ -64,7 +65,9 @@ int main()
     
     // TestLeetcode53();
 
-    TestLeetcode88();
+    // TestLeetcode88();
+
+    TestLeetcode169();
     
     return 0;
 }
