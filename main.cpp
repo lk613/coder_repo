@@ -6,7 +6,9 @@
 #include "MaxSubArray.h"
 #include "MergeSortedArray.h"
 #include "MajorityElement.h"
+#include "AddTwoNumbers.h"
 
+#if 0
 static void PrintVector(std::vector<int> &vec)
 {
     for (int i = 0; i < vec.size(); i++)
@@ -15,6 +17,7 @@ static void PrintVector(std::vector<int> &vec)
     }
     std::cout << std::endl;
 }
+#endif
 
 static void TestLeetCode_695()
 {
@@ -67,7 +70,9 @@ int main()
 
     // TestLeetcode88();
 
-    TestLeetcode169();
+    // TestLeetcode169();
+
+    TestLeetcode2();
     
     return 0;
 }

@@ -19,6 +19,7 @@ include_directories(
     leetcode/26_删除数组中重复项
     leetcode/27_移除元素
     leetcode/169_多数元素
+    leetcode/2_两数相加
 )
 
 add_executable(code_repo 
@@ -36,6 +37,7 @@ add_executable(code_repo
     leetcode/26_删除数组中重复项/RemoveDuplicates.cpp
     leetcode/27_移除元素/RemoveElements.cpp
     leetcode/169_多数元素/MajorityElement.cpp
+    leetcode/2_两数相加/AddTwoNumbers.cpp
 )
 
 target_link_libraries(code_repo m)
