@@ -16,6 +16,7 @@ include_directories(
     leetcode/101_对称二叉树
     leetcode/206_反转链表
     leetcode/88_合并两个有序数组
+    leetcode/26_删除数组中重复项
 )
 
 add_executable(code_repo 
@@ -30,6 +31,7 @@ add_executable(code_repo
     leetcode/101_对称二叉树/Symmetric.cpp
     leetcode/206_反转链表/InverseLinklist.cpp
     leetcode/88_合并两个有序数组/MergeSortedArray.cpp
+    leetcode/26_删除数组中重复项/RemoveDuplicates.cpp
 )
 
 target_link_libraries(code_repo m)
