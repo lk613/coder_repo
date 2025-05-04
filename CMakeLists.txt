@@ -20,6 +20,7 @@ include_directories(
     leetcode/27_移除元素
     leetcode/169_多数元素
     leetcode/2_两数相加
+    leetcode/21_合并两个有序链表
 )
 
 add_executable(code_repo 
@@ -38,6 +39,7 @@ add_executable(code_repo
     leetcode/27_移除元素/RemoveElements.cpp
     leetcode/169_多数元素/MajorityElement.cpp
     leetcode/2_两数相加/AddTwoNumbers.cpp
+    leetcode/21_合并两个有序链表/MergeTwoLists.cpp
 )
 
 target_link_libraries(code_repo m)
