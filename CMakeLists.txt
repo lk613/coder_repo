@@ -21,6 +21,7 @@ include_directories(
     leetcode/169_多数元素
     leetcode/2_两数相加
     leetcode/21_合并两个有序链表
+    leetcode/138_随机链表的复制
 )
 
 add_executable(code_repo 
@@ -40,6 +41,7 @@ add_executable(code_repo
     leetcode/169_多数元素/MajorityElement.cpp
     leetcode/2_两数相加/AddTwoNumbers.cpp
     leetcode/21_合并两个有序链表/MergeTwoLists.cpp
+    leetcode/138_随机链表的复制/CopyRandomList.cpp
 )
 
 target_link_libraries(code_repo m)
