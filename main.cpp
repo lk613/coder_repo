@@ -19,33 +19,6 @@ static void PrintVector(std::vector<int> &vec)
 }
 #endif
 
-static void TestLeetCode_695()
-{
-    #if 1
-    // [[1,1,0,0,0],[1,1,0,0,0],[0,0,0,1,1],[0,0,0,1,1]]
-    // 第一次提交未通过的测试用例，记得重复入队列的元素，导致重复计数
-    std::vector<std::vector<int>> grid = {
-        {1,1,0,0,0},
-        {1,1,0,0,0},
-        {0,0,0,1,1},
-        {0,0,0,1,1}
-    };
-
-#else
-    std::vector<std::vector<int>> grid = {
-        {0,0,1,0,0,0,0,1,0,0,0,0,0},
-        {0,0,0,0,0,0,0,1,1,1,0,0,0},
-        {0,1,1,0,1,0,0,0,0,0,0,0,0},
-        {0,1,0,0,1,1,0,0,1,0,1,0,0},
-        {0,1,0,0,1,1,0,0,1,1,1,0,0},
-        {0,0,0,0,0,0,0,0,0,0,1,0,0},
-        {0,0,0,0,0,0,0,1,1,1,0,0,0},
-        {0,0,0,0,0,0,0,1,1,0,0,0,0}
-    };
-#endif
-    int maxArea = maxAreaOfIslandByBfs(grid);
-    std::cout << "Max area of island: " << maxArea << std::endl;
-}
 
 static void TestLeetCode_104()
 {
@@ -60,6 +33,8 @@ static void TestLeetCode_104()
 
 int main()
 {
+    TestLeetCode_695();
+
     // TestLeetCode_104();
     
     // TestLeetcode200();
@@ -72,7 +47,7 @@ int main()
 
     // TestLeetcode169();
 
-    TestLeetcode2();
+    // TestLeetcode2();
     
     return 0;
 }
