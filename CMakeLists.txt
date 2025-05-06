@@ -7,6 +7,7 @@ include_directories(
     sort_alg/BubbleSort
     sort_alg/QuickSort
     matrix_lib
+    match_lib
     sto/link_list
     sto/array
     sto/stack
@@ -22,6 +23,7 @@ add_executable(code_repo
     sort_alg/BubbleSort/bubble_sort.c
     sort_alg/QuickSort/quick_sort.c
     matrix_lib/matrix.c
+    match_lib/match_alg.c
     sto/link_list/reverse_linklist.c
     sto/link_list/delete_inverse_kth.c
     sto/link_list/list_node.c
