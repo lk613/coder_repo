@@ -23,6 +23,7 @@ include_directories(
     leetcode/21_合并两个有序链表
     leetcode/138_随机链表的复制
     leetcode/146_LRU缓存
+    leetcode/912_排序数组
 )
 
 add_executable(code_repo 
@@ -44,6 +45,7 @@ add_executable(code_repo
     leetcode/21_合并两个有序链表/MergeTwoLists.cpp
     leetcode/138_随机链表的复制/CopyRandomList.cpp
     leetcode/146_LRU缓存/LRUCache.cpp
+    leetcode/912_排序数组/SortArray.cpp
 )
 
 target_link_libraries(code_repo m)

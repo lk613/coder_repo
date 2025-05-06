@@ -7,6 +7,7 @@
 #include "MergeSortedArray.h"
 #include "MajorityElement.h"
 #include "AddTwoNumbers.h"
+#include "SortArray.h"
 
 #if 0
 static void PrintVector(std::vector<int> &vec)
@@ -33,7 +34,9 @@ static void TestLeetCode_104()
 
 int main()
 {
-    TestLeetCode_695();
+    TestLeetcode912();
+
+    // TestLeetCode_695();
 
     // TestLeetCode_104();
     
