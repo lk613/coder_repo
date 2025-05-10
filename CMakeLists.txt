@@ -26,6 +26,7 @@ include_directories(
     leetcode/912_排序数组
     leetcode/1_两数之和
     leetcode/49_字母异位词分组
+    leetcode/148_最长连续序列
 )
 
 add_executable(code_repo 
@@ -50,6 +51,7 @@ add_executable(code_repo
     leetcode/912_排序数组/SortArray.cpp
     leetcode/1_两数之和/TwoSum.cpp
     leetcode/49_字母异位词分组/GroupAnagrams.cpp
+    leetcode/148_最长连续序列/LongestSequence.cpp
 )
 
 target_link_libraries(code_repo m)
