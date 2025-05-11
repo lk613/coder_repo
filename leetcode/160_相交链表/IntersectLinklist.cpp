@@ -1,6 +1,36 @@
 #include "IntersectLinklist.h"
 #include <math.h>
+#include <unordered_set>
 
+#if 1
+// hash table 
+ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
+{
+    if (headA == NULL || headB == NULL)
+    {
+        return NULL;
+    }
+
+    std::unordered_set<ListNode *> hash_table;
+    while (headA)
+    {
+        hash_table.insert(headA);
+        headA = headA->next;
+    }
+
+    while (headB)
+    {
+        if (hash_table.count(headB))
+        {
+            return headB;
+        }
+        headB = headB->next;
+    }
+
+    return NULL;
+}
+#else
+// two pointer
 ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
 {
     if (headA == NULL || headB == NULL)
@@ -40,3 +70,4 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
 
     return slow;
 }
+#endif
