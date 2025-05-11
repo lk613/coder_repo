@@ -28,6 +28,7 @@ include_directories(
     leetcode/49_字母异位词分组
     leetcode/148_最长连续序列
     leetcode/283_移动零
+    leetcode/160_相交链表
 )
 
 add_executable(code_repo 
@@ -54,6 +55,7 @@ add_executable(code_repo
     leetcode/49_字母异位词分组/GroupAnagrams.cpp
     leetcode/148_最长连续序列/LongestSequence.cpp
     leetcode/283_移动零/MoveZeros.cpp
+    leetcode/160_相交链表/IntersectLinklist.cpp
 )
 
 target_link_libraries(code_repo m)
