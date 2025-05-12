@@ -26,6 +26,7 @@ void moveZeroes(vector<int>& nums)
 /** 一次循环
  * 使用两个指针 i 和 j，只要 nums[i]!=0，我们就交换 nums[i] 和 nums[j]
  */
+#if 0
 void moveZeroes(vector<int>& nums) {
     int i = 0;
     for (int j = 0; j < nums.size(); j++)
@@ -39,6 +40,7 @@ void moveZeroes(vector<int>& nums) {
     }
 }
 
+#endif
 // void moveZeroes(vector<int>& nums) {
 //     int slow = 0;
 //     int fast = 0;

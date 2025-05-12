@@ -28,6 +28,8 @@ include_directories(
     leetcode/49_字母异位词分组
     leetcode/148_最长连续序列
     leetcode/283_移动零
+    leetcode/11_盛最多水的容器
+    leetcode/160_相交链表
 )
 
 add_executable(code_repo 
