@@ -8,6 +8,7 @@
 #include "MajorityElement.h"
 #include "AddTwoNumbers.h"
 #include "SortArray.h"
+#include "quick_sort_meijia.h"
 
 #if 0
 static void PrintVector(std::vector<int> &vec)
@@ -34,7 +35,9 @@ static void TestLeetCode_104()
 
 int main()
 {
-    TestLeetcode912();
+    TestMeijiaQuickSort();
+
+    // TestLeetcode912();
 
     // TestLeetCode_695();
 
