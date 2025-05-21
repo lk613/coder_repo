@@ -31,6 +31,7 @@ include_directories(
     leetcode/11_盛最多水的容器
     leetcode/160_相交链表
     leetcode/3_无重复字符的最长子串
+    leetcode/24_两两交换链表中的节点
     sort/QuickSort
 )
 
@@ -59,6 +60,7 @@ add_executable(code_repo
     leetcode/148_最长连续序列/LongestSequence.cpp
     leetcode/283_移动零/MoveZeros.cpp
     leetcode/3_无重复字符的最长子串/LongestSubstring.cpp
+    leetcode/24_两两交换链表中的节点/LinkListSwapPairs.cpp
     # sort/QuickSort/QuickSort.cpp
     sort/QuickSort/quick_sort_meijia.cpp
 )
